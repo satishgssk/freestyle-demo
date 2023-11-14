@@ -1,19 +1,26 @@
 pipeline {
     agent any
     stages {
-        stage('run.sh') {
+        stage('Build') {
             steps {
-                sh '''
-                sh run.sh
+               sh '''
+                sh build.sh
                 '''
             }
         }
-        stage('Hello') {
+        stage('Test') {
             steps {
-                sh '''
-                echo "this from Pipeline"
+               sh '''
+                sh test.sh
                 '''
-
+            }
+        }
+        stage('Deploy') {
+            steps { 
+                sh '''
+                cat ./deploy.sh
+                sh deploy.sh
+                '''
             }
         }
     }
